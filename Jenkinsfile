@@ -17,7 +17,7 @@ pipeline {
         stage("build jar") {
             steps {
                 script {
-                    buildJar()
+                    buildJar(mvn package)
                 }
             }
         }
