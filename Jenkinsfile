@@ -1,6 +1,7 @@
 #!/usr/bin/env groovy
-df gv
 
+
+def gv
 
 pipeline {
     agent any
@@ -8,31 +9,19 @@ pipeline {
         maven 'maven'
     }
     stages {
-        stage("build jar") {
+        stage("init") {
             steps {
                 script {
-                    buildJar 'mvn package'
-                }
-            }
-        }
-        stage("build and push image") {
-            steps {
-                script {
-                    buildImage 'lokeshlish/java_app:jma-3.0'
-                    dockerLogin(docker)
-                    dockerPush 'lokeshlish/java_app:jma-3.0'
+                    gv = load "script.groovy"
                 }
             }
         }
         stage("deploy") {
             steps {
                 script {
-                    echo 'deploying image'
+                    gv.deployApp()
                 }
             }
         }
     }
 }
-
-
-
