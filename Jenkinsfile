@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-library identifier: 'Jenkins_Library@master', retriever: modernSCM(
+library identifier: 'Jenkins_Library@main', retriever: modernSCM(
         [$class: 'GitSCMSource',
          remote: 'https://github.com/lokeshlish/Jenkins_Library.git',
          credentialsId: 'git'
