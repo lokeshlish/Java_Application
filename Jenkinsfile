@@ -11,7 +11,7 @@ library identifier: 'Jenkins_Library@main', retriever: modernSCM(
 pipeline {
     agent any
     tools {
-        maven 'maven'
+        maven 'Maven'
     }
     stages {
         stage("build jar") {
