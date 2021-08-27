@@ -1,11 +1,5 @@
 #!/usr/bin/env groovy
-
-library identifier: 'Jenkins_Library@main', retriever: modernSCM(
-        [$class: 'GitSCMSource',
-         remote: 'https://github.com/lokeshlish/Jenkins_Library.git',
-         credentialsId: 'git'
-        ]
-)_
+df gv
 
 
 pipeline {
