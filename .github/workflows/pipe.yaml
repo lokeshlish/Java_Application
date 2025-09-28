@@ -1,0 +1,32 @@
+name: Deploy App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: echo "Building app..."
+
+  deploy-staging:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: Azure Prod
+    steps:
+      - name: Deploy to Staging
+        run: echo "Deploying to Staging..."
+
+  deploy-production:
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+    environment: Azure Prod
+    steps:
+      - name: Deploy to Production
+        run: echo "Deploying to Production..."
