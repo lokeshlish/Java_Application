@@ -27,12 +27,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Wait for approval before deploy
-        uses: trstringer/manual-approval@v1
+        uses: codex-/await-approval-action@v1
         with:
-          approvers: lokeshlish      # GitHub usernames
-          minimum-approvals: 1
-          issue-title: "Deploy approval required"
-          issue-body: "Approve this to deploy the latest image to production."
+          github-token: ${{ secrets.TOKEN }}
+          approvers: lokeshlish           # GitHub username(s) allowed to approve
+          instructions: "Please approve to continue deploying to production."
 
   deploy-production:
     needs: approval
