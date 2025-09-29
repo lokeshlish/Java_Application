@@ -1,4 +1,4 @@
-name: Deploy App
+name: CI with Manual Approval
 
 on:
   push:
@@ -10,32 +10,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      - name: Build
-        run: echo "Building app..."
-
-  deploy-staging:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to Staging
-        run: echo "Deploying to Staging..."
+      - name: Build step
+        run: echo "Running build..."
 
   approval:
-    needs: deploy-staging
     runs-on: ubuntu-latest
+    needs: build
     steps:
-      - name: Wait for approval before deploy
-        uses: codex-/await-approval-action@v1
+      - name: Wait for manual approval
+        uses: trstringer/manual-approval@v1
         with:
-          github-token: ${{ secrets.TOKEN }}
-          approvers: lokeshlish           # GitHub username(s) allowed to approve
-          instructions: "Please approve to continue deploying to production."
+          approvers: lokeshlish  # replace with your GitHub username(s)
+          minimum-approvals: 1
+          issue-title: "Manual approval needed for deploy"
+          issue-body: "Please approve or deny this workflow run."
 
-  deploy-production:
-    needs: approval
+  deploy:
     runs-on: ubuntu-latest
+    needs: approval
     steps:
-      - name: Deploy to Production
-        run: echo "Deploying to Production..."
+      - name: Deploy step
+        run: echo "Deploying after approval..."
