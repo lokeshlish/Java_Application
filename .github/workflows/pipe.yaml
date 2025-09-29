@@ -33,7 +33,7 @@ jobs:
           minimum-approvals: 1
           issue-title: "Deploy approval required"
           issue-body: "Approve this to deploy the latest image to production."
-          secret: ${{ secrets.TOKEN }}
+          secret: ${{ secrets.GITHUB_TOKEN }}
 
   deploy-production:
     needs: approval
