@@ -5,9 +5,6 @@ on:
     branches:
       - main
 
-permissions:
-  issues: write   # required for manual approval action
-
 jobs:
   build:
     runs-on: ubuntu-latest
